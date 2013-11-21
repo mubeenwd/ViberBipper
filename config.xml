@@ -21,6 +21,9 @@
         The "device" permission is required for the 'deviceready' event.
     -->
     <feature name="http://api.phonegap.com/1.0/device" />
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.Notification" />
+    </feature>
 
     <!--
         If you do not want any permissions to be added to your app, add the
@@ -28,7 +31,7 @@
         permission on your app, which PhoneGap requires.
     -->
     <preference name="permissions"                value="none"/>
-
+    
     <!-- Customize your app and platform with the preference element. -->
     <preference name="phonegap-version"           value="2.9.0" />
     <!-- all: current version of PhoneGap -->
@@ -64,7 +67,7 @@
     <!-- Plugins can also be added here. -->
     <plugin name="Camera" value="org.apache.cordova.CameraLauncher" />
     <plugin name="Notification" value="org.apache.cordova.Notification"/>
-    <plugin name="Vibration" value="org.apache.cordova.vibration"/>
+    <!--<plugin name="Vibration" value="org.apache.cordova.vibration"/>-->
     
     <!--
         <gap:plugin name="Example" />
