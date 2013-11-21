@@ -18,22 +18,83 @@
         document.addEventListener("deviceready", onDeviceReady, false);
 
         function onDeviceReady() {
-            setTimeout(function () {
-                vibrate();
-                playBeep();
-            }, 10000);
+            
         }
-
-        // Beep three times
-        //
+        
         function playBeep() {
-            navigator.notification.beep(3);
+            try {
+                navigator.notification.beep(5);
+            } catch (ex) {
+                showAlert(ex.Message, 'Error Playing Beep');
+            }
         }
 
-        // Vibrate for 2 seconds
-        //
         function vibrate() {
-            navigator.notification.vibrate(2000);
+            try {
+                navigator.notification.vibrate(2000);
+            } catch (ex) {
+                showAlert(ex.Message, 'Error In Viberation');
+            }
+        }
+
+        function showAlert(message, title) {
+            try {
+                navigator.notification.alert(
+                    message,
+                    alertDismissed,
+                    title,
+                    'Okay'
+                );
+            } catch (ex) {
+
+            }
+        }
+
+        function showConfirm() {
+            try {
+                navigator.notification.confirm(
+                    'Are you ready to play this app!', 
+                     onConfirm,            
+                    'Question',           
+                    'Yes,No'        
+                );
+            } catch (ex) {
+                showAlert(ex.Message, 'Error In Confirm');
+            }
+        }
+
+        function onConfirm(buttonIndex) {
+            try {
+                showAlert('You selected button ' + buttonIndex, 'Message on confirmed')
+            } catch (ex) {
+                showAlert(ex.Message, 'Error In Confirm');
+            }
+        }
+
+        function shwoPrompt() {
+            try {
+                navigator.notification.prompt(
+                    'Please enter your name', 
+                    onPrompt,                  
+                    'Registration',          
+                    ['Ok', 'Exit'],           
+                    'Anis Hashmi'                
+                );
+            } catch (ex) {
+                showAlert(ex.Message, 'Error In Propmt');
+            }
+        }
+
+        function onPrompt(results) {
+            try {
+                showAlert("You selected button number " + results.buttonIndex + " and entered " + results.input1, 'On Prompt Clicked');
+            } catch (ex) {
+                showAlert(ex.Message, 'Error In Propmt');
+            }
+        }
+
+        function alertDismissed() {
+            // do something
         }
     </script>
 </head>
@@ -46,11 +107,11 @@
         </div>
         <div data-role="content">
             <ul data-role="listview" id="ulHomeList" data-inset="false" data-icon="false" data-divider-theme="b">
-                <li><a href="#dvPagePost">Add New Cars</a></li>
-                <li><a href="#pgIndex" id="lstShowCars">Show List Of Cars</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Exit Application</a></li>
+                <li><a href="#" onclick="playBeep();">Play Beep</a></li>
+                <li><a href="#" onclick="vibrate();">Viberate</a></li>
+                <li><a href="#" onclick="shwoPrompt();">Show Prompt</a></li>
+                <li><a href="#" onclick="showConfirm();">Show Confirm</a></li>
+                <li><a href="#" onclick="showAlert('Just an alert','Showing Alert');">Show Alert</a></li>
             </ul>
         </div>
         <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme='b'>
